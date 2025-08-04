@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/presentation/bloc/app_state.dart';
+import 'package:myapp/presentation/page/checklist_page.dart';
+import 'package:myapp/presentation/page/financial_page.dart';
+import 'package:myapp/presentation/page/home_page.dart';
+import 'package:myapp/presentation/page/lifting_page.dart';
+import 'package:myapp/presentation/page/other_page.dart';
 import 'package:myapp/presentation/widgets/main_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -10,51 +15,71 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
+class MainPageNavigationItem {
+  final String navigateName;
+  final Icon inactiveStateIcon;
+  final Icon activeStateIcon;
+  final Widget page;
+
+  MainPageNavigationItem(
+    this.navigateName,
+    this.inactiveStateIcon,
+    this.activeStateIcon,
+    this.page,
+  );
+}
+
 class _MainPageState extends State<MainPage> {
+  List<MainPageNavigationItem> navigationItemList = [
+    MainPageNavigationItem(
+      "Home",
+      Icon(Icons.home_outlined),
+      Icon(Icons.home),
+      HomePage(),
+    ),
+    MainPageNavigationItem(
+      "Checklist",
+      Icon(Icons.check_box_outlined),
+      Icon(Icons.check_box),
+      ChecklistPage(),
+    ),
+    MainPageNavigationItem(
+      "Fitness",
+      Icon(Icons.fitness_center_outlined),
+      Icon(Icons.fitness_center),
+      LiftingPage(),
+    ),
+    MainPageNavigationItem(
+      "Financial",
+      Icon(Icons.account_balance_outlined),
+      Icon(Icons.account_balance),
+      FinancialPage(),
+    ),
+    MainPageNavigationItem(
+      "Other",
+      Icon(Icons.help_outline),
+      Icon(Icons.help),
+      OtherPage(),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
 
     var selectedIndex = appState.selectedIndex;
 
-    Widget page;
-    switch (appState.selectedIndex) {
-      case 0:
-        page = Align(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text('Home')],
-          ),
-        );
-      case 1:
-        page = Align(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text('Money')],
-          ),
-        );
-      case 2:
-        page = Align(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text('Other')],
-          ),
-        );
-      default:
-        throw UnimplementedError('no widget for $selectedIndex');
-    }
-
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          bottomNavigationBar: MainNavigationBar(),
+          bottomNavigationBar: MainNavigationBar(
+            navigationItemList: navigationItemList,
+          ),
           body: Container(
             color: Theme.of(context).colorScheme.primaryContainer,
-            child: page,
-          ));
+            child: navigationItemList[selectedIndex].page,
+          ),
+        );
       },
     );
   }
