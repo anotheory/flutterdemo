@@ -2,31 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myapp/presentation/bloc/user_authentication_bloc.dart';
 
-class UserRegisterPage extends StatefulWidget {
-  const UserRegisterPage({super.key});
+class UserLoginPage extends StatefulWidget {
+  const UserLoginPage({super.key});
 
   @override
-  State<UserRegisterPage> createState() => _UserRegisterPageState();
+  State<UserLoginPage> createState() => _UserLoginPageState();
 }
 
-class _UserRegisterPageState extends State<UserRegisterPage> {
+class _UserLoginPageState extends State<UserLoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _confirmPasswordController.dispose();
     super.dispose();
   }
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       context.read<UserAuthenticationBloc>().add(
-            RegisterEvent(
+            LoginEvent(
               email: _emailController.text.trim(),
               password: _passwordController.text,
             ),
@@ -38,7 +36,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: const Text('Login'),
       ),
       body: BlocListener<UserAuthenticationBloc, UserAuthenticationState>(
         listener: (context, state) {
@@ -64,7 +62,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Create Account',
+                  'Welcome Back',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 32),
@@ -94,28 +92,10 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter a password';
+                      return 'Please enter your password';
                     }
                     if (value.length < 6) {
                       return 'Password must be at least 6 characters';
-                    }
-                    return null;
-                  },
-                  obscureText: true,
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _confirmPasswordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Confirm Password',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please confirm your password';
-                    }
-                    if (value != _passwordController.text) {
-                      return 'Passwords do not match';
                     }
                     return null;
                   },
@@ -126,15 +106,15 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: _submitForm,
-                    child: const Text('Register'),
+                    child: const Text('Login'),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/login');
+                    Navigator.pushNamed(context, '/register');
                   },
-                  child: const Text('Already have an account? Login'),
+                  child: const Text('Don\'t have an account? Register'),
                 ),
               ],
             ),
