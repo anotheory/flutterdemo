@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/presentation/bloc/app_state.dart';
-import 'package:myapp/presentation/page/checklist_page.dart';
-import 'package:myapp/presentation/page/financial_page.dart';
-import 'package:myapp/presentation/page/home_page.dart';
-import 'package:myapp/presentation/page/lifting_page.dart';
-import 'package:myapp/presentation/page/other_page.dart';
+import 'package:myapp/presentation/pages/checklist_page.dart';
+import 'package:myapp/presentation/pages/financial_page.dart';
+import 'package:myapp/presentation/pages/home_page.dart';
+import 'package:myapp/presentation/pages/lifting_page.dart';
+import 'package:myapp/presentation/pages/other_page.dart';
 import 'package:myapp/presentation/widgets/main_navigation_bar.dart';
 import 'package:provider/provider.dart';
 

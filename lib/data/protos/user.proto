@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+option csharp_namespace = "Clyde";
+
+package user;
+
+// The user service definition.
+service UserAuthentication {
+  // Register a new user
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+  
+  // Authenticate a user
+  rpc Authenticate (AuthenticateRequest) returns (AuthenticateResponse);
+  
+  // Verify a token
+  rpc VerifyToken (VerifyTokenRequest) returns (VerifyTokenResponse);
+}
+
+// Register request message
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+  string firstName = 3;
+  string lastName = 4;
+}
+
+// Register response message
+message RegisterResponse {
+  bool success = 1;
+  string message = 2;
+  string token = 3;
+}
+
+// Authenticate request message
+message AuthenticateRequest {
+  string email = 1;
+  string password = 2;
+}
+
+// Authenticate response message
+message AuthenticateResponse {
+  bool success = 1;
+  string message = 2;
+  string token = 3;
+}
+
+// Verify token request message
+message VerifyTokenRequest {
+  string token = 1;
+}
+
+// Verify token response message
+message VerifyTokenResponse {
+  bool valid = 1;
+  string message = 2;
+  User user = 3;
+}
+
+// User message
+message User {
+  string id = 1;
+  string email = 2;
+  string firstName = 3;
+  string lastName = 4;
+}

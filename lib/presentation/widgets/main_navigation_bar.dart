@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/presentation/bloc/app_state.dart';
-import 'package:myapp/presentation/page/main_page.dart';
+import 'package:myapp/presentation/pages/main_page.dart';
 import 'package:provider/provider.dart';
 
 class MainNavigationBar extends StatelessWidget {
