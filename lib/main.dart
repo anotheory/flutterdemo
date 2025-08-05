@@ -7,7 +7,7 @@ import 'package:myapp/presentation/pages/main_page.dart';
 import 'package:myapp/presentation/pages/register/user_register_server_page.dart';
 import 'package:provider/provider.dart';
 
-import 'injection_container.dart' as di;
+import 'core/di/injection_container.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

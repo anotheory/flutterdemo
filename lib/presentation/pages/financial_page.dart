@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/injection_container.dart' as di;
+import 'package:myapp/core/di/injection_container.dart' as di;
 
 class FinancialPage extends StatefulWidget {
   const FinancialPage({super.key});

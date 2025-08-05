@@ -11,13 +11,11 @@ import 'package:myapp/domain/usecases/register_user.dart';
 import 'package:myapp/domain/usecases/verify_token.dart';
 import 'package:myapp/presentation/bloc/app_state.dart';
 import 'package:myapp/presentation/bloc/auth_bloc.dart';
-import 'package:myapp/presentation/bloc/user_authentication_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> injectionInit() async {
   sl.registerFactory<AppState>(() => AppState());
-  sl.registerFactory<UserAuthenticationBloc>(() => UserAuthenticationBloc());
 
    sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
 
